@@ -1,4 +1,4 @@
-### language quiz tool
+### quizlingo
 
 features
 
