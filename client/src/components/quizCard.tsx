@@ -2,7 +2,6 @@ import {
     Card,
     CardContent,
     Typography,
-    Button,
     Box,
     IconButton,
     Stack,
@@ -11,14 +10,9 @@ import { FaRegEdit } from "react-icons/fa";
 import { MdContentCopy } from "react-icons/md";
 import { MdDeleteOutline } from "react-icons/md";
 import { QuizCardInterface } from "../types";
+import CustomButton from "./CustomButton";
 
-const QuizCard = ({
-    title,
-    numQuestions,
-    date,
-    numPlays,
-    gameCode,
-}: QuizCardInterface) => {
+const QuizCard = ({ title, questions, date, gameCode }: QuizCardInterface) => {
     return (
         <Card sx={{ mb: 5, px: 3, py: 2 }}>
             <CardContent>
@@ -29,11 +23,7 @@ const QuizCard = ({
                         </Typography>
 
                         <Typography color="text.secondary" variant="body2">
-                            {numQuestions} questions | Created {date}
-                        </Typography>
-
-                        <Typography color="text.secondary" variant="body2">
-                            {numPlays} plays
+                            {questions.length} questions | Created {date}
                         </Typography>
 
                         <Typography color="text" variant="body1" sx={{ mt: 2 }}>
@@ -55,7 +45,7 @@ const QuizCard = ({
                                 <MdDeleteOutline />
                             </IconButton>
                         </Stack>
-                        <Button variant="contained">Start Game</Button>
+                        <CustomButton>Start game</CustomButton>
                     </Stack>
                 </Box>
             </CardContent>
