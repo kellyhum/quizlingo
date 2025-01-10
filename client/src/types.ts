@@ -1,7 +1,6 @@
 export interface QuizCardInterface {
     title: string;
-    numQuestions: number;
+    questions: string[];
     date: string;
-    numPlays: number;
     gameCode: string;
 }
