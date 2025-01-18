@@ -1,13 +1,14 @@
-from flask import Flask
+from flask import Flask, jsonify
 from dotenv import load_dotenv
 import firebase_admin
 from firebase_admin import credentials, db
 import os
+from flask_cors import CORS
 
 load_dotenv()
 
-firebase_creds = os.getenv('FIREBASE_CREDS')
-firebase_url = os.getenv('FIREBASE_URL')
+firebase_creds = os.getenv('VITE_FIREBASE_CREDS')
+firebase_url = os.getenv('VITE_FIREBASE_URL')
 
 # connect to firebase
 cred_obj = credentials.Certificate(firebase_creds)
@@ -41,12 +42,13 @@ testQuizzes = [
 
 # initialize flask app
 app = Flask(__name__)
+CORS(app)
 
 @app.route('/')
 def main():
     return 'testing'
 
-@app.route('/quizzes')
+@app.route('/quizzes') # was ran once to get test quizzes into the database
 def setupTestQuizzes():
     ref = db.reference('/quizzes')
 
@@ -55,13 +57,13 @@ def setupTestQuizzes():
 
     return 'quizzes added to firebase'
 
-@app.route('/dashboard')
+@app.route('/dashboardData')
 def pullQuizzesFromDB():
     ref = db.reference('/quizzes')
 
     try:
         data = ref.get()
-        return data
+        return jsonify(data)
     
     except:
         return 'data could not be fetched'
