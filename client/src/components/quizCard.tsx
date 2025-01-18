@@ -23,7 +23,8 @@ const QuizCard = ({ title, questions, date, gameCode }: QuizCardInterface) => {
                         </Typography>
 
                         <Typography color="text.secondary" variant="body2">
-                            {questions.length} questions | Created {date}
+                            {questions != undefined ? questions.length : "No "}{" "}
+                            questions | Created {date}
                         </Typography>
 
                         <Typography color="text" variant="body1" sx={{ mt: 2 }}>
